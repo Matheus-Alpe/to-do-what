@@ -15,8 +15,6 @@
 
         <TodoList
             :todoList="todoList"
-            @remove-todo="removeTodo"
-            @update-todo="updateTodo"
         />
     </div>
 </template>

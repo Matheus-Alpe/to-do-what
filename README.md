@@ -1,4 +1,4 @@
-# to do app
+# to-do-app v2
 
 ## Project setup
 ```
