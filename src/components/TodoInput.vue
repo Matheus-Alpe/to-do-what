@@ -6,7 +6,7 @@
             :placeholder="placeholder"
             @keyup.enter="emitTodo"
             ref="input"
-        >
+        />
     </div>
 </template>
 

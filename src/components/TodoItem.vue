@@ -15,7 +15,7 @@
                 <span
                     v-else
                     class="collapse"
-                    :class="{ 'collapse-open': showOption}"
+                    :class="{ 'collapse-open': showOption }"
                     @click.stop="showOption = !showOption"
                 >
                     <i class="fas fa-angle-right"></i>
@@ -24,10 +24,7 @@
             <p>
                 {{ todo.description }}
             </p>
-            <div
-                class="btn-remove"
-                @click.stop="emitRemoveTodo"
-            >
+            <div class="btn-remove" @click.stop="emitRemoveTodo">
                 <i class="fas fa-trash-alt"></i>
             </div>
         </div>
@@ -79,6 +76,7 @@ export default {
         'todo.subTodos': function (newTodoList) {
             if (newTodoList.length) {
                 this.todo.completed = false;
+                this.emitUpdateTodo();
             }
         }
     },

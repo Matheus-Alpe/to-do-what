@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class='app' :class="{ 'align-center': hasNoTodo }">
+    <div id="app" class="app" :class="{ 'align-center': hasNoTodo }">
         <header class="header">
             <div class="header-info">
                 <i class="fas fa-clipboard-list"></i>
@@ -13,14 +13,12 @@
             />
         </header>
 
-        <TodoList
-            :todoList="todoList"
-        />
+        <TodoList :todoList="todoList" />
     </div>
 </template>
 
 <script>
-import { eventBus } from './main';
+import { eventBus } from "./main";
 
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
@@ -40,7 +38,7 @@ export default {
     },
 
     computed: {
-        hasNoTodo () {
+        hasNoTodo() {
             return !this.todoList.length;
         }
     },
@@ -89,9 +87,9 @@ export default {
     },
 
     mounted() {
-        eventBus.$on('add-todo', this.addTodo);
-        eventBus.$on('update-todo', this.updateTodo);
-        eventBus.$on('remove-todo', this.removeTodo);
+        eventBus.$on("add-todo", this.addTodo);
+        eventBus.$on("update-todo", this.updateTodo);
+        eventBus.$on("remove-todo", this.removeTodo);
     }
 };
 </script>
@@ -108,7 +106,6 @@ body {
     height: 100vh;
     position: relative;
 }
-
 
 .app {
     position: absolute;
@@ -133,13 +130,13 @@ body {
 
             i {
                 font-size: 70px;
-                opacity: .8;
+                opacity: 0.8;
             }
 
             h2 {
                 justify-self: flex-start;
                 font-size: 2rem;
-                opacity: .8;
+                opacity: 0.8;
                 font-family: Arial, Helvetica, sans-serif;
             }
 
@@ -163,7 +160,6 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
 }
-
 
 @keyframes rainbow {
     0% {

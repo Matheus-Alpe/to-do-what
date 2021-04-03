@@ -11,10 +11,7 @@
             <p>
                 {{ subtodo.description }}
             </p>
-            <div
-                class="btn-remove"
-                @click="emitRemoveSubtodo"
-            >
+            <div class="btn-remove" @click="emitRemoveSubtodo">
                 <i class="fas fa-trash-alt"></i>
             </div>
         </div>
