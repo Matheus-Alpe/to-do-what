@@ -20,13 +20,12 @@ export default {
     },
 
     methods: {
-        emitTodo(event) {
-            const value = event.target.value;
-            if (!value) {
+        emitTodo({ target }) {
+            if (!target.value) {
                 return;
             }
-            this.$emit('add-todo', value);
-            event.target.value = '';
+            this.$emit('add-todo', target.value);
+            target.value = '';
         },
 
         focusInput() {

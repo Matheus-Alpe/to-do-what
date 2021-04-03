@@ -5,14 +5,17 @@
                 <input
                     type="checkbox"
                     v-model="subtodo.completed"
-                    @change="sendUpdatedTodo"
+                    @change="emitUpdateSubtodo"
                 />
             </div>
             <p>
                 {{ subtodo.description }}
             </p>
-            <div class="btn-remove" @click="$emit('remove-subtodo')">
-                x
+            <div
+                class="btn-remove"
+                @click="emitRemoveSubtodo"
+            >
+                <i class="fas fa-trash-alt"></i>
             </div>
         </div>
     </li>
@@ -21,14 +24,24 @@
 <script>
 export default {
     name: 'SubTodoItem',
+
     props: {
-        subtodo: Object
+        subtodoItem: Object
+    },
+
+    data() {
+        return {
+            subtodo: { ...this.subtodoItem }
+        }
     },
 
     methods: {
-        sendUpdatedTodo() {
-            this.$emit("update-subtodo", this.subtodo);
+        emitUpdateSubtodo() {
+            this.$emit('update-subtodo', this.subtodo);
         },
+        emitRemoveSubtodo() {
+            this.$emit('remove-subtodo', this.subtodo);
+        }
     }
 }
 </script>
@@ -40,6 +53,10 @@ li {
 
     .todo-item {
         background-color: rgba(167, 167, 167, 0.548);
+
+        i {
+            font-size: 10px;
+        }
     }
 }
 </style>

@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import { eventBus } from './main';
+
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
 
@@ -84,8 +86,14 @@ export default {
         }
     },
 
-    mounted() {
+    created() {
         this.todoList = JSON.parse(appStorage.getItem("todoList")) || [];
+    },
+
+    mounted() {
+        eventBus.$on('add-todo', this.addTodo);
+        eventBus.$on('update-todo', this.updateTodo);
+        eventBus.$on('remove-todo', this.removeTodo);
     }
 };
 </script>

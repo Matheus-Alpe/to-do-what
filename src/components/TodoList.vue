@@ -1,12 +1,10 @@
 <template>
     <ul class="todo-list">
-      
-        <TodoItem 
+
+        <TodoItem
             v-for="todo in todoList"
             :todoItem="todo"
             :key="todo.id"
-            @remove-todo="$emit('remove-todo', todo)"
-            @update-todo="sendUpdatedTodo"
         />
 
     </ul>
@@ -23,10 +21,5 @@ export default {
     props: {
         todoList: Array
     },
-    methods: {
-        sendUpdatedTodo(updatedTodo) {
-            this.$emit('update-todo', updatedTodo);
-        }
-    }
 }
 </script>

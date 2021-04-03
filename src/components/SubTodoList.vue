@@ -2,16 +2,16 @@
     <div class="subtodo-list">
         <ul v-if="hasSubTodo">
             <SubTodoItem
-                v-for="subtodo in subTodoList"
-                :subtodo="subtodo"
+                v-for="subtodo in subtodos"
+                :subtodoItem="subtodo"
                 :key="subtodo.id"
-                @remove-subtodo="$emit('remove-subtodo', subtodo)"
-                @update-subtodo="sendUpdatedSubtodo"
+                @remove-subtodo="emitRemoveSubtodo"
+                @update-subtodo="emitUpdateSubtodo"
             />
         </ul>
         <TodoInput
             fontSize="smaller"
-            @add-todo="sendAddedSubtodo"
+            @add-todo="emitAddSubtodo"
             placeholder="add subtask"
         />
     </div>
@@ -22,7 +22,7 @@ import SubTodoItem from './SubTodoItem';
 import TodoInput from './TodoInput';
 
 export default {
-    name: 'SubTodoList',
+    name: 'SubtodoList',
 
     components: {
         SubTodoItem,
@@ -30,21 +30,24 @@ export default {
     },
 
     props: {
-        subTodoList: Array
+        subtodos: Array
     },
 
     computed: {
         hasSubTodo() {
-            return Boolean(this.subTodoList.length);
+            return Boolean(this.subtodos.length);
         },
     },
 
     methods: {
-        sendAddedSubtodo(addedSubtodo) {
+        emitAddSubtodo(addedSubtodo) {
             this.$emit('add-todo', addedSubtodo);
         },
-        sendUpdatedSubtodo(updatedTodo) {
-            this.$emit('update-subtodo', updatedTodo);
+        emitUpdateSubtodo(updatedSubtodo) {
+            this.$emit('update-subtodo', updatedSubtodo);
+        },
+        emitRemoveSubtodo(removeSubtodo) {
+            this.$emit('remove-subtodo', removeSubtodo);
         }
     }
 

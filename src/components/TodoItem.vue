@@ -10,21 +10,23 @@
                     v-if="!hasSubTodo"
                     type="checkbox"
                     v-model="todo.completed"
-                    @click.stop="sendUpdatedTodo"
+                    @change="emitUpdateTodo"
                 />
                 <span
                     v-else
                     class="collapse"
                     :class="{ 'collapse-open': showOption}"
                     @click.stop="showOption = !showOption"
-                ><i class="fas fa-angle-right"></i></span>
+                >
+                    <i class="fas fa-angle-right"></i>
+                </span>
             </div>
             <p>
                 {{ todo.description }}
             </p>
             <div
                 class="btn-remove"
-                @click.stop="$emit('remove-todo')"
+                @click.stop="emitRemoveTodo"
             >
                 <i class="fas fa-trash-alt"></i>
             </div>
@@ -32,7 +34,7 @@
 
         <div v-if="showOption">
             <SubTodoList
-                :subTodoList="todo.subTodos"
+                :subtodos="todo.subTodos"
                 @remove-subtodo="removeSubtodo"
                 @update-subtodo="updateSubtodo"
                 @add-todo="addSubtodo"
@@ -82,12 +84,15 @@ export default {
     },
 
     methods: {
-        sendUpdatedTodo(event) {
+        emitUpdateTodo(event) {
             if (event && event.target.type === 'checkbox') {
                 this.showOption = false;
             }
-            // this.$emit("update-todo", this.todo);
             eventBus.updateTodo(this.todo);
+        },
+
+        emitRemoveTodo() {
+            eventBus.removeTodo(this.todo);
         },
 
         getValidId() {
@@ -104,7 +109,7 @@ export default {
                 isSubTodo: true,
             });
 
-            this.sendUpdatedTodo();
+            this.emitUpdateTodo();
         },
 
         updateSubtodo(updatedSubtodo) {
@@ -113,14 +118,14 @@ export default {
             );
             this.todo.subTodos.splice(index, 1, updatedSubtodo);
 
-            this.sendUpdatedTodo();
+            this.emitUpdateTodo();
         },
 
         removeSubtodo(removeSubtodo) {
             const index = this.todo.subTodos.findIndex((subtodo) => subtodo.id === removeSubtodo.id);
             this.todo.subTodos.splice(index, 1);
 
-            this.sendUpdatedTodo();
+            this.emitUpdateTodo();
         },
     },
 };
@@ -155,7 +160,7 @@ li {
         }
 
         i {
-            font-size: 15px;
+            font-size: 13px;
         }
 
         .checkbox {
