@@ -1,4 +1,12 @@
-# to-do-app v2
+# To do what?
+
+Just a simple to-do app using:
+```
+- Vue 2;
+- SCSS;
+```
+
+![](./src/assets/to-do-what.gif)
 
 ## Project setup
 ```
